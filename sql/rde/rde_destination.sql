@@ -3,7 +3,14 @@
 UPDATE HL7_PharmacyOrders
 SET order_control = ${order_control},
     order_status  = ${order_status},
-    message_id    = ${message_id}
+    message_id    = ${message_id},
+    dose          = ${dose},
+    dose_unit     = ${dose_unit},
+    frequency     = ${frequency},
+    route         = ${route},
+    dispense_qty  = ${dispense_qty},
+    filler_order  = ${filler_order},
+    location      = ${location}
 WHERE placer_order = ${placer_order} AND mrn = ${mrn};
 
 IF @@ROWCOUNT = 0
