@@ -18,7 +18,7 @@ Issues found while building and testing these interfaces, with root cause and fi
 | 12 | Wrong values in SQL (MRN, provider) | Channel-map key typos and fields read by position | Consistent key names; select repeating fields by type |
 | 13 | VXU messages ACK'd but never stored | Filter field pointed to a non-existent segment | `msg['MSH']['MSH.9']['MSH.9.1']` |
 | 14 | FHIR server received literal `${fhir_bundle}` | Channel-map key not set or misspelled | Matched the transformer key to the destination placeholder |
-| 15 | `URISyntaxException` from the HTTP Sender | Raw `|` in the query string | URL-encode as `%7C` |
+| 15 | `URISyntaxException` from the HTTP Sender | Raw `\|` in the query string | URL-encode as `%7C` |
 | 16 | `ReferenceError: patient is not defined` | `Patient` vs `patient` (case-sensitive) | Consistent variable names |
 | 17 | Filter crashed with "unterminated string literal" | Curly quote (`”`) pasted into the rule value | Retyped straight quotes |
 | 18 | Bundle contained only 1 of 3 entries | All entries written inside one object; duplicate keys overwrote each other | One object per entry, separated by `},{` |
@@ -29,4 +29,4 @@ Issues found while building and testing these interfaces, with root cause and fi
 | 23 | `ALTER TABLE … ADD COLUMN` failed | MySQL/PostgreSQL syntax used on SQL Server | `ALTER TABLE … ADD column_name type` |
 | 24 | A40 filter would crash | Misplaced quote in `['MSH'.9.2]` | `['MSH.9.2']`; checked in the Generated Script tab |
 | 25 | SmartHL7 "Network Error" | Channel not deployed / not listening on the port | Deployed the channel and confirmed the port on the Dashboard |
-| 26 | RDE^O11 orders returned `MSA|AR` ("Message Rejected") | Second filter rule read `MSH.11` / `MSH.9.1` instead of the trigger event | Rule set to `MSH.9.2` = `O11`; redeployed; ACK `AA` |
+| 26 | RDE^O11 orders returned `MSA\|AR` ("Message Rejected") | Second filter rule read `MSH.11` / `MSH.9.1` instead of the trigger event | Rule set to `MSH.9.2` = `O11`; redeployed; ACK `AA` |
