@@ -29,3 +29,4 @@ Issues found while building and testing these interfaces, with root cause and fi
 | 23 | `ALTER TABLE … ADD COLUMN` failed | MySQL/PostgreSQL syntax used on SQL Server | `ALTER TABLE … ADD column_name type` |
 | 24 | A40 filter would crash | Misplaced quote in `['MSH'.9.2]` | `['MSH.9.2']`; checked in the Generated Script tab |
 | 25 | SmartHL7 "Network Error" | Channel not deployed / not listening on the port | Deployed the channel and confirmed the port on the Dashboard |
+| 26 | RDE^O11 orders returned `MSA|AR` ("Message Rejected") | Second filter rule read `MSH.11` / `MSH.9.1` instead of the trigger event | Rule set to `MSH.9.2` = `O11`; redeployed; ACK `AA` |
