@@ -1,0 +1,10 @@
+MSH|^~\&|PHARMRX|STORE4471^1306849450^NPI|TXIIS|TXDSHS|20261022093012-0500||VXU^V04^VXU_V04|VXU2026102209301201|P|2.5.1|||ER|AL|||||Z22^CDCPHINVS|STORE4471|TXIIS
+PID|1||MRN884512^^^PHARMRX^MR||Mensah^Akosua^B^^^^L|Boateng^^^^^^M|19780314|F||2054-5^Black or African American^CDCREC|5821 Eldorado Pkwy^^Little Elm^TX^75068^USA^P||^PRN^PH^^^972^5550142|||||||||2186-5^Not Hispanic or Latino^CDCREC||N|1
+PD1|||||||||||02^Reminder/Recall - any method^HL70215|||||A|20261022|20261022
+ORC|RE||RX550123^PHARMRX|||||||^Lee^Dana^^^^^^^^^^RPH||1122334455^Owusu^Kofi^^^^^^NPI^L^^^NPI|||||||||STORE4471^Little Elm Pharmacy 4471^HL70362
+RXA|0|1|20261022091500-0500||140^Influenza, seasonal, injectable, preservative free^CVX|0.5|mL^milliliters^UCUM||00^New immunization record^NIP001|1987654321^Lee^Dana^^^^^^NPI^^^^NPI|^^^STORE4471||||UT4567AA|20270630|SKB^GlaxoSmithKline^MVX|||CP|A
+RXR|C28161^Intramuscular^NCIT|LD^Left Deltoid^HL70163
+OBX|1|CE|64994-7^Vaccine funding program eligibility category^LN|1|V01^Not VFC eligible^HL70064||||||F|||20261022091500|||VXC40^Eligibility captured at the immunization level^CDCPHINVS
+OBX|2|CE|30963-3^Vaccine funding source^LN|2|PHC70^Private funds^CDCPHINVS||||||F|||20261022091500
+OBX|3|CE|69764-9^Document type^LN|3|253088698300012711120420^Influenza Vaccine VIS^cdcgs1vis||||||F|||20261022091500
+OBX|4|TS|29769-7^Date vaccine information statement presented^LN|3|20261022||||||F|||20261022091500

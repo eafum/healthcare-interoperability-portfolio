@@ -1,0 +1,10 @@
+MSH|^~\&|EPIC|TESTHOSP|MIRTH|COBBYAI|20261019101500||ADT^A01|ADT20001|P|2.5.1
+EVN|A01|20261019101500
+PID|1||123-45-6789^^^USSSA^SS~9005^^^TESTHOSP^MR||Owusu^Ama^K||19850920|F|||45 Oak Ave^^Frisco^TX^75034^USA||^PRN^PH^^1^469^5559876|||M^Married^HL70002||ACC5501|123-45-6789
+NK1|1|Owusu^Kofi|SPO^Spouse^HL70063|45 Oak Ave^^Frisco^TX^75034|^PRN^PH^^1^469^5551111
+PV1|1|I|4WEST^412^B^TESTHOSP||||1234^Doe^Jane|||MED||||7|||1234^Doe^Jane||V77001|||||||||||||||||||||||||20261019101500
+AL1|1|DA^Drug Allergy^HL70127|PCN^Penicillin^L|SV^Severe^HL70128|Hives
+AL1|2|FA^Food Allergy^HL70127|PNT^Peanuts^L|MO^Moderate^HL70128|Swelling
+DG1|1||J18.9^Pneumonia, unspecified organism^I10||20261019|A
+DG1|2||E11.9^Type 2 diabetes mellitus without complications^I10||20261019|W
+IN1|1|BCBS001^Blue Cross PPO|60054|Blue Cross Blue Shield of Texas||||GRP7788||||||||Owusu^Ama^K|SEL^Self^HL70063|19850920||||||||||||||||||MBR445566

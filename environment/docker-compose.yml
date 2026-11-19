@@ -1,0 +1,41 @@
+# Local test environment: OpenEMR + MariaDB + SFTP.
+# Set the variables in a .env file next to this one (never commit real passwords).
+services:
+  mysql:
+    image: mariadb:10.11
+    command: ['mariadbd', '--character-set-server=utf8mb4']
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - databasevolume:/var/lib/mysql
+
+  openemr:
+    image: openemr/openemr:latest
+    restart: always
+    ports:
+      - "8300:80"
+      - "9300:443"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_ROOT_PASS: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: openemr
+      MYSQL_PASS: ${OPENEMR_DB_PASSWORD}
+      OE_USER: admin
+      OE_PASS: ${OPENEMR_ADMIN_PASSWORD}
+    volumes:
+      - ./hl7:/var/www/localhost/htdocs/openemr/sites/default/documents/hl7
+    depends_on:
+      - mysql
+
+  sftp:
+    image: atmoz/sftp
+    restart: always
+    ports:
+      - "2222:22"
+    volumes:
+      - ./hl7/sftp_results:/home/mirth/results
+    command: mirth:${SFTP_PASSWORD}:1001
+
+volumes:
+  databasevolume: {}
