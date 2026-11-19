@@ -20,7 +20,7 @@ Built by **Eugene Afum-Agyei** as part of the Data InterOps program (June 2026 �
 | 4 | **MDM documents → SQL** | MDM^T02 | MLLP | SQL Server | TXA metadata; multi-line OBX report text joined; timestamps converted |
 | 5 | **Lab orders: OpenEMR → lab** | ORM^O01 | File reader → MLLP | Lab system | Preprocessor repairs segments split by embedded carriage returns; duplicate DG1 removed; SSN removed; ACK validated |
 | 6 | **Lab results: lab → OpenEMR** | ORU^R01 | MLLP → file + SFTP | OpenEMR EHR | Results matched to order (ORC/OBR placer number), patient and provider NPI; filed to the chart with OBX.8 abnormal flags; queue-on-failure verified with an SFTP outage test |
-| 7 | **Charges → SQL** | DFT^P03 | MLLP | SQL Server | CPT/HCPCS, NDC and Z-segment revenue code; duplicate prevention on transaction ID; credits linked to the original charge |
+| 7 | **Charges → SQL** ([INC-2058](docs/tickets/INC-2058.md)) | DFT^P03 | MLLP | SQL Server | CPT/HCPCS, NDC and Z-segment revenue code; duplicate prevention on transaction ID; credits linked to the original charge |
 | 8 | **Immunizations → registry table** | VXU^V04 (v2.5.1) | MLLP | SQL Server | RXA/RXR/OBX parsing (CVX, MVX, lot, VFC eligibility); add / update / delete via RXA.21 with `MERGE` on ORC.3 and soft deletes |
 | 9 | **ADT → FHIR** | ADT^A01, A04 | MLLP → HTTPS | HAPI FHIR R4 | PID → Patient, PV1 → Encounter in one **transaction Bundle**; `urn:uuid` linking; conditional `PUT` on MRN and visit number (idempotent) |
 | 10 | **ORM → FHIR** | ORM^O01 | MLLP → HTTPS | HAPI FHIR R4 | Patient + Encounter + **ServiceRequest** (ORC + OBR) with references to both |
@@ -89,6 +89,7 @@ screenshots/        Message Browser, SQL results and FHIR responses
 ## Ticket write-ups
 
 Real-world style incidents worked from report to fix:
+- [INC-2058: Charges feed into the billing table (DFT^P03)](docs/tickets/INC-2058.md)
 - [INC-2071: Lab comments missing and corrected results duplicated](docs/tickets/INC-2071.md)
 - [INC-2084: Results filed to a duplicate patient record (ADT^A40)](docs/tickets/INC-2084.md)
 - [INC-2093: Pharmacy orders not reaching the pharmacy (RDE^O11)](docs/tickets/INC-2093.md)
