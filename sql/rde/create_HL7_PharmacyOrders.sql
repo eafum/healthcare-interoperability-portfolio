@@ -1,0 +1,25 @@
+-- INC-2093: pharmacy orders from RDE^O11 (one row per order)
+CREATE TABLE HL7_PharmacyOrders(
+id INT IDENTITY(1,1) PRIMARY KEY,
+message_id         VARCHAR(50) NOT NULL,
+order_control      VARCHAR(5) NOT NULL,
+placer_order       VARCHAR(50) NOT NULL,
+filler_order       VARCHAR(50),
+mrn                VARCHAR(20) NOT NULL,
+patient_name       VARCHAR(100),
+location           VARCHAR(20),
+ndc_code           VARCHAR(20),
+drug_name          VARCHAR(200),
+dose               DECIMAL(10,2),
+dose_unit          VARCHAR(20),
+dosage_form        VARCHAR(20),
+frequency          VARCHAR(20),
+route              VARCHAR(10),
+dispense_qty       INT,
+ordering_provider  VARCHAR(100),
+provider_npi       VARCHAR(10),
+ordered_at         DATETIME2,
+order_status       VARCHAR(20),
+received_at        DATETIME2 DEFAULT SYSDATETIME(),
+CONSTRAINT UQ_PharmOrder UNIQUE (placer_order, mrn)
+);

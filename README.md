@@ -27,6 +27,7 @@ Built by **Eugene Afum-Agyei** as part of the Data InterOps program (June 2026 �
 | 11 | **ORU → FHIR** | ORU^R01 | MLLP → HTTPS | HAPI FHIR R4 | One **Observation per OBX** (loop), **DiagnosticReport** with `result` links, order updated to `completed`; LOINC, UCUM, reference ranges, interpretation flags |
 | 12 | **Lab results with comments and corrections → SQL** ([INC-2071](docs/tickets/INC-2071.md)) | ORU^R01 | MLLP | SQL Server | Walks all segments in order so each NTE attaches to its OBX; one row per result; corrected results (OBX.11 = C) replace the original via filler order + LOINC key |
 | 13 | **Patient merge** ([INC-2084](docs/tickets/INC-2084.md)) | ADT^A40 | MLLP | SQL Server | PID.3 survivor / MRG.1 retired; validation before any change; results re-pointed with the original MRN kept for audit; merge log |
+| 14 | **Pharmacy orders** ([INC-2093](docs/tickets/INC-2093.md)) | RDE^O11 | MLLP | SQL Server | ORC.1 order control (NW / DC / CA / XO / HD) mapped to order status; NDC drug, dose, frequency, route and dispense quantity from RXE/RXR; upsert on placer order + MRN; required-field validation |
 
 Across every channel: **MSH.9 message-type filters** on the source, ACK handling (AA / AE / AR), and errors surfaced in the Message Browser instead of silently dropped.
 
@@ -40,7 +41,7 @@ flowchart LR
     M -- MLLP --> LAB[Lab system]
     LAB -- ORU^R01 MLLP --> M
     M -- file + SFTP --> EHR
-    SRC[Test senders<br/>SmartHL7] -- ADT / SIU / MDM / DFT / VXU --> M
+    SRC[Test senders<br/>SmartHL7] -- ADT / SIU / MDM / DFT / VXU / RDE --> M
     M -- MERGE --> SQL[(SQL Server /<br/>PostgreSQL)]
     M -- FHIR transaction Bundle --> FHIR[(HAPI FHIR R4)]
 ```
@@ -90,6 +91,7 @@ screenshots/        Message Browser, SQL results and FHIR responses
 Real-world style incidents worked from report to fix:
 - [INC-2071: Lab comments missing and corrected results duplicated](docs/tickets/INC-2071.md)
 - [INC-2084: Results filed to a duplicate patient record (ADT^A40)](docs/tickets/INC-2084.md)
+- [INC-2093: Pharmacy orders not reaching the pharmacy (RDE^O11)](docs/tickets/INC-2093.md)
 
 ---
 
@@ -109,7 +111,7 @@ Real problems found and fixed while building these interfaces (full list in [`do
 
 ## Skills demonstrated
 
-**HL7 v2:** ADT (incl. A40 merge), ORM, ORU, SIU, MDM, DFT, VXU, ACK · MSH, EVN, PID, PV1, MRG, ORC, OBR, OBX, NTE, TXA, SCH, AIL, AIP, FT1, DG1, AL1, IN1, GT1, RXA, RXR, Z-segments
+**HL7 v2:** ADT (incl. A40 merge), ORM, ORU, RDE, SIU, MDM, DFT, VXU, ACK · MSH, EVN, PID, PV1, MRG, ORC, OBR, OBX, NTE, TXA, SCH, AIL, AIP, FT1, DG1, AL1, IN1, GT1, RXE, RXA, RXR, Z-segments
 **FHIR R4:** Patient, Encounter, ServiceRequest, Observation, DiagnosticReport, Condition, Bundle (transaction), conditional update, search, `$validate`, `$everything`, OperationOutcome
 **Integration:** Mirth Connect channels, filters, preprocessors, JavaScript transformers, response handling, queuing · MLLP/TCP, SFTP, HTTPS/REST
 **Data:** SQL Server and PostgreSQL `MERGE` / upsert patterns, data validation, PHI minimization
