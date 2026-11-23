@@ -31,3 +31,4 @@ Issues found while building and testing these interfaces, with root cause and fi
 | 25 | SmartHL7 "Network Error" | Channel not deployed / not listening on the port | Deployed the channel and confirmed the port on the Dashboard |
 | 26 | RDE^O11 orders returned `MSA\|AR` ("Message Rejected") | Second filter rule read `MSH.11` / `MSH.9.1` instead of the trigger event | Rule set to `MSH.9.2` = `O11`; redeployed; ACK `AA` |
 | 27 | XO change orders kept the old dose | Upsert `UPDATE` set only order control, status and message ID | Added the RXE fields to `SET`; redeployed and resent the XO messages |
+| 28 | Patient app showed a blank extra lab result | Malformed OBX (truncated code, no value) saved as an Observation; identifier built from the OBX code, so the corrected resend created a second Observation | Validate OBX-3 and OBX-5 (throw); identifier from filler order + OBX-1 set ID ([FHIR-2101](tickets/FHIR-2101.md)) |

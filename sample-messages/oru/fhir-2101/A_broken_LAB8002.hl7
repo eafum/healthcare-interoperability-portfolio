@@ -1,0 +1,8 @@
+MSH|^~\&|LABSYS|MEMHOSP|EHR|MEMHOSP|20261123110000||ORU^R01|LAB80003|P|2.5.1
+PID|1||9160^^^MEMHOSP^MR||Asare^Yaa^^^^^L||19880722|F
+PV1|1|O|LAB^01^A||||1234567890^Owusu^Kofi^^^^MD||||||||||||V90160
+ORC|RE|ORD8002|LAB8002||CM||||20261123103000|||1234567890^Owusu^Kofi^^^^MD
+OBR|1|ORD8002|LAB8002|58410-2^CBC panel - Blood by Automated count^LN|||20261123100000|||||||||1234567890^Owusu^Kofi^^^^MD||||||20261123105500|||F
+OBX|1|NM|6690-2^Leukocytes [#/volume] in Blood by Automated count^LN||5.9|10*3/uL|4.5-11.0|N|||F
+OBX|2|NM|718-7^Hemoglobin [Mass/volume] in Blood^LN||12.7|g/dL|12.0-16.0|N|||F
+OBX|3|NM|777^^LN||||||||F

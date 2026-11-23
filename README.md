@@ -24,7 +24,7 @@ Built by **Eugene Afum-Agyei** as part of the Data InterOps program (June 2026 �
 | 8 | **Immunizations → registry table** | VXU^V04 (v2.5.1) | MLLP | SQL Server | RXA/RXR/OBX parsing (CVX, MVX, lot, VFC eligibility); add / update / delete via RXA.21 with `MERGE` on ORC.3 and soft deletes |
 | 9 | **ADT → FHIR** | ADT^A01, A04 | MLLP → HTTPS | HAPI FHIR R4 | PID → Patient, PV1 → Encounter in one **transaction Bundle**; `urn:uuid` linking; conditional `PUT` on MRN and visit number (idempotent) |
 | 10 | **ORM → FHIR** | ORM^O01 | MLLP → HTTPS | HAPI FHIR R4 | Patient + Encounter + **ServiceRequest** (ORC + OBR) with references to both |
-| 11 | **ORU → FHIR** | ORU^R01 | MLLP → HTTPS | HAPI FHIR R4 | One **Observation per OBX** (loop), **DiagnosticReport** with `result` links, order updated to `completed`; LOINC, UCUM, reference ranges, interpretation flags |
+| 11 | **ORU → FHIR** ([FHIR-2101](docs/tickets/FHIR-2101.md)) | ORU^R01 | MLLP → HTTPS | HAPI FHIR R4 | One **Observation per OBX** (loop), **DiagnosticReport** with `result` links, order updated to `completed`; LOINC, UCUM, reference ranges, interpretation flags |
 | 12 | **Lab results with comments and corrections → SQL** ([INC-2071](docs/tickets/INC-2071.md)) | ORU^R01 | MLLP | SQL Server | Walks all segments in order so each NTE attaches to its OBX; one row per result; corrected results (OBX.11 = C) replace the original via filler order + LOINC key |
 | 13 | **Patient merge** ([INC-2084](docs/tickets/INC-2084.md)) | ADT^A40 | MLLP | SQL Server | PID.3 survivor / MRG.1 retired; validation before any change; results re-pointed with the original MRN kept for audit; merge log |
 | 14 | **Pharmacy orders** ([INC-2093](docs/tickets/INC-2093.md)) | RDE^O11 | MLLP | SQL Server | ORC.1 order control (NW / DC / CA / XO / HD) mapped to order status; NDC drug, dose, frequency, route and dispense quantity from RXE/RXR; upsert on placer order + MRN; required-field validation |
@@ -93,6 +93,7 @@ Real-world style incidents worked from report to fix:
 - [INC-2071: Lab comments missing and corrected results duplicated](docs/tickets/INC-2071.md)
 - [INC-2084: Results filed to a duplicate patient record (ADT^A40)](docs/tickets/INC-2084.md)
 - [INC-2093: Pharmacy orders not reaching the pharmacy (RDE^O11)](docs/tickets/INC-2093.md)
+- [FHIR-2101: Lab results not showing correctly in the patient app (ORU → FHIR)](docs/tickets/FHIR-2101.md)
 
 ---
 

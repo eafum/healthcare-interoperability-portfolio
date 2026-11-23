@@ -82,6 +82,12 @@ for (var i = 0; i < msg['OBX'].length(); i++) {
     var flag   = obx['OBX.8']['OBX.8.1'].toString();      // L
     var status = obx['OBX.11']['OBX.11.1'].toString();    // F
 
+    // FHIR-2101: set ID + validation (never store a result without a code or value)
+    var setId = obx['OBX.1']['OBX.1.1'].toString();       // 1, 2, 3
+    if (code == '' || value == '') {
+        throw 'OBX ' + setId + ' is missing a code or value';
+    }
+
     // BUILD the Observation
     var obsUuid = 'urn:uuid:' + UUIDGenerator.getUUID();
     var observation = {
@@ -90,7 +96,7 @@ for (var i = 0; i < msg['OBX'].length(); i++) {
             status: 'generated',
             div: '<div xmlns="http://www.w3.org/1999/xhtml">' + name + ': ' + value + ' ' + units + (flag ? ' (' + flag + ')' : '') + '</div>'
         },
-        identifier: [{ system: 'http://mirthlab.example.org/result', value: fillerID + '-' + code }],
+        identifier: [{ system: 'http://mirthlab.example.org/result', value: fillerID + '-' + setId }],
         basedOn: [{ reference: orderRef }],
         status: statusMap[status] || 'final',
         category: [{ coding: [{ system: 'http://terminology.hl7.org/CodeSystem/observation-category', code: 'laboratory', display: 'Laboratory' }] }],
@@ -120,7 +126,7 @@ for (var i = 0; i < msg['OBX'].length(); i++) {
     entries.push({
         fullUrl: obsUuid,
         resource: observation,
-        request: { method: 'PUT', url: 'Observation?identifier=http://mirthlab.example.org/result|' + fillerID + '-' + code }
+        request: { method: 'PUT', url: 'Observation?identifier=http://mirthlab.example.org/result|' + fillerID + '-' + setId }
     });
     obsRefs.push({ reference: obsUuid });
 }
